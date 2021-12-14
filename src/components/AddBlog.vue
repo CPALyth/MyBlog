@@ -1,7 +1,8 @@
 <template>
   <div class="add-blog">
     <h2>添加博客</h2>
-    <form action="">
+     
+    <form v-if="!submitted">
       <label>博客标题</label>
       <input type="text" v-model="blog.title" required />
       <label>博客内容</label>
@@ -28,9 +29,13 @@
         </option>
       </select>
 
-      <button @click.prevent="post">添加博客</button>
+      <button @click.prevent="postBlog">添加博客</button>
     </form>
-    <hr />
+
+    <div v-if="submitted">
+      <h3>您的博客发布成功!</h3>
+    </div>
+
     <div id="preview">
       <h3>博客总览</h3>
       <p>博客标题: {{ blog.title }}</p>
@@ -59,8 +64,24 @@ export default {
         author: "",
       },
       authors: ["Eward", "Tim", "Bob"],
+      submitted: false,
     };
-  }
+  },
+  methods: {
+    postBlog: function () {
+      this.$http
+        .post("https://jsonplaceholder.typicode.com/posts", {
+          title: this.blog.title,
+          body: this.blog.content,
+          userId: 1,
+        })
+        .then(function (data) {
+          // 请求成功
+          console.log(data);
+          this.submitted = true;
+        });
+    },
+  },
 };
 </script>
 
