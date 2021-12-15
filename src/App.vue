@@ -1,23 +1,22 @@
 <template>
-  <div id="app">
-    <!-- <add-blog></add-blog> -->
-    <show-blog></show-blog>
-  </div>
+    <div id="app">
+        <!-- <add-blog></add-blog> -->
+        <show-blog></show-blog>
+    </div>
 </template>
 
 <script>
-import AddBlog from './components/AddBlog'
-import ShowBlog from './components/ShowBlog.vue'
+import AddBlog from "./components/AddBlog";
+import ShowBlog from "./components/ShowBlog";
 
 export default {
-  name: 'App',
-  components: {
-    AddBlog,
-    ShowBlog
-  }
-}
+    name: "App",
+    components: {
+        AddBlog,
+        ShowBlog,
+    },
+};
 </script>
 
 <style>
-
 </style>
