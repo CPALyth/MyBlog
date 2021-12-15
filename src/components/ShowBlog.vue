@@ -1,10 +1,10 @@
 <template>
     <div id="show-blog" v-theme:column="'wide'">
         <h1>博客总览</h1>
-        <div v-for="blog in blogs" class="single-blog" :key="blog">
-            <h2 v-rainbow>{{ blog.title }}</h2>
+        <div v-for="blog in blogs" class="single-blog" :key="blog.title">
+            <h2 v-rainbow>{{ blog.title | to-uppercase }}</h2>
             <article>
-                {{ blog.body }}
+                {{ blog.body | snippet }}
             </article>
         </div>
     </div>
@@ -14,7 +14,9 @@
 export default {
     name: "show-blog",
     data() {
-        return {};
+        return {
+            blogs: []
+        };
     },
     created() {
         this.$http
