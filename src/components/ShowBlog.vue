@@ -1,7 +1,8 @@
 <template>
     <div id="show-blog" v-theme:column="'wide'">
         <h1>博客总览</h1>
-        <div v-for="blog in blogs" class="single-blog" :key="blog.title">
+        <input type="text" v-model="search" placeholder="搜索">
+        <div v-for="blog in filteredBlogs" class="single-blog" :key="blog.title">
             <h2 v-rainbow>{{ blog.title | to-uppercase }}</h2>
             <article>
                 {{ blog.body | snippet }}
@@ -15,7 +16,8 @@ export default {
     name: "show-blog",
     data() {
         return {
-            blogs: []
+            blogs: [],
+            search: ""
         };
     },
     created() {
@@ -26,6 +28,18 @@ export default {
                 console.log(this.blogs);
             });
     },
+    computed: {
+        filteredBlogs: function() {
+            return this.blogs.filter((blog) => {
+                return blog.title.match(this.search)
+            })
+        }
+    },
+    filters: {
+        "to-uppercase": function(value) {
+            
+        }
+    }
 };
 </script>
 
