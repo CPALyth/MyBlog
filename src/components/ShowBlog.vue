@@ -3,7 +3,9 @@
         <h1>博客总览</h1>
         <input type="text" v-model="search" placeholder="搜索">
         <div v-for="blog in filteredBlogs" class="single-blog" :key="blog.title">
-            <h2 v-rainbow2>{{ blog.title | toUppercase }}</h2>
+            <router-link v-bind:to="'/blog/' + blog.id">
+                <h2 v-rainbow2>{{ blog.title | toUppercase }}</h2>
+            </router-link>
             <article>
                 {{ blog.body | snippet }}
             </article>
@@ -61,5 +63,16 @@ export default {
     margin: 20px 0;
     box-sizing: border-box;
     background: #eee;
+}
+
+#show-blog a {
+    color: #444;
+    text-decoration: none;
+}
+
+input[type="text"] {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
 }
 </style>
