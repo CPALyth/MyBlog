@@ -91,11 +91,10 @@ export default {
     methods: {
         postBlog: function () {
             this.$http
-                .post("https://jsonplaceholder.typicode.com/posts", {
-                    title: this.blog.title,
-                    body: this.blog.content,
-                    userId: 1,
-                })
+                .post(
+                    "https://myblog-2be6a-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json",
+                    this.blog
+                )
                 .then(function (data) {
                     // 请求成功
                     console.log(data);
