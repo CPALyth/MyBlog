@@ -4,11 +4,13 @@
         <p>作者: {{ blog.author }}</p>
         <p>分类:</p>
         <ul>
-            <li v-for="category in blog.categories" :key=category>
-                {{category}}
+            <li v-for="category in blog.categories" :key="category">
+                {{ category }}
             </li>
         </ul>
         <article>{{ blog.content }}</article>
+        <button @click="deleteSingleBlog">删除</button>
+        <router-link :to="'/edit/' + id">编辑</router-link>
     </div>
 </template>
 
@@ -35,6 +37,19 @@ export default {
             .then(function (data) {
                 this.blog = data;
             });
+    },
+    methods: {
+        deleteSingleBlog() {
+            this.$http
+                .delete(
+                    "https://myblog-2be6a-default-rtdb.asia-southeast1.firebasedatabase.app/posts/" +
+                        this.id +
+                        ".json"
+                )
+                .then(response => {
+                    this.$router.push({path: '/'})
+                })
+        },
     },
 };
 </script>
