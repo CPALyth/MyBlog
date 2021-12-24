@@ -44,7 +44,7 @@ Vue.filter("snippet", function(value) {
 // 自定义路由
 const router = new VueRouter({
     routes: Routes,
-    mode: "history"  // 加了这个路由后就不会有/#
+    mode: "history"  // 加了这个路由后就不会有/#, 默认模式是"hash"
 })
 
 /* eslint-disable no-new */

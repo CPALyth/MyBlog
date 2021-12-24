@@ -7,7 +7,7 @@
                 <h2 v-rainbow2>{{ blog.title | toUppercase }}</h2>
             </router-link>
             <article>
-                {{ blog.body | snippet }}
+                {{ blog.content | snippet }}
             </article>
         </div>
     </div>
@@ -24,10 +24,21 @@ export default {
     },
     created() {
         this.$http
-            .get("https://jsonplaceholder.typicode.com/posts")
+            .get("https://myblog-2be6a-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json")
             .then(function (data) {
-                this.blogs = data.body.slice(0, 10);
-                console.log(this.blogs);
+                console.log(data.json());
+                return data.json();
+            })
+            .then(function(data) {
+                var blogsArray = [];
+                for (let key in data) {
+                    console.log(key);
+                    console.log(data[key]);
+                    data[key].id = key;
+                    blogsArray.push(data[key]);
+                }
+                console.log(blogsArray);
+                this.blogs = blogsArray;
             });
     },
     computed: {
